@@ -91,9 +91,10 @@
    * @param  {number} width  output image width
    * @param  {number} height output image height
    * @param  {string} type   output image type
+   * @param  {number} quality A Number between 0 and 1 indicating image quality if the requested type is image/jpeg or image/webp. If this argument is anything else, the default value for image quality is used. The default value is 0.92. Other arguments are ignored.
    * @return {string}        output image base64 string
    */
-  out.resize = function resize(img, width, height, type) {
+  out.resize = function resize(img, width, height, type, quality) {
     if (IMG_TYPE.indexOf(type) < 0) {
       type = IMG_TYPE_PNG;
     }
@@ -106,7 +107,7 @@
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.globalCompositeOperation = '';
     }
-    return canvas.toDataURL('image/' + type);
+    return canvas.toDataURL('image/' + type, quality);
   };
 
   return out;
